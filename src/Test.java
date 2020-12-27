@@ -16,8 +16,8 @@ public class Test {
         开始读文件
         */
             InputStream in=Class.forName("Test").getResourceAsStream("/users.xlsx");
-            ReadExcel readExcel=new ReadExcel();
-            User users[]=readExcel.readExcel(in);
+            ReadUserExcel readUserExcel=new ReadUserExcel();
+            User users[]=readUserExcel.readUserExcel(in);
             System.out.println("从Excel读取的密码："+users[0].getPassword());
 
             for(int i=0;i<users.length;i++){
