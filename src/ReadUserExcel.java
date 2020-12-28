@@ -8,10 +8,10 @@ import java.io.*;
 import java.text.DecimalFormat;
 
 public class ReadUserExcel {
-    public User[] readUserExcel(InputStream inputStream) {
+    public User[] readUserExcel(InputStream in) {
         User users[] = null;
         try {
-            XSSFWorkbook xw = new XSSFWorkbook(new FileInputStream(FileDescriptor.in));
+            XSSFWorkbook xw = new XSSFWorkbook(in);
             XSSFSheet xs = xw.getSheetAt(0);
             users = new User[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
@@ -42,7 +42,7 @@ public class ReadUserExcel {
 
     private String getValue(XSSFCell cell) {
         String value;
-        CellType type = cell.getCellTypeEnum();
+        CellType type = cell.getCellType();
 
         switch (type) {
             case STRING:

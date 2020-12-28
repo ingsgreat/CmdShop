@@ -22,13 +22,13 @@ public class ReadProductExcel {
                     if (cell == null)
                         continue;
                     if (k == 0) {
-                        product.setId(this.getValue(cell));
+                        product.setId(this.getValue(cell));//商品编号
                     } else if (k == 1) {
-                        product.setName(this.getValue(cell));//给password属性赋值
+                        product.setName(this.getValue(cell));//商品名称
                     } else if (k == 2) {
-                        product.setPrice(Float.valueOf(this.getValue(cell)));//给address属性赋值
+                        product.setPrice(Float.valueOf(this.getValue(cell)));//商品价格
                     } else if (k == 3) {
-                        product.setDesc(this.getValue(cell));//给phone属性赋值
+                        product.setDesc(this.getValue(cell));//商品描述
                     }
                 }
                 products[j-1] = product;
