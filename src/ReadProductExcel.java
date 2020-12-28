@@ -8,10 +8,10 @@ import java.io.*;
 import java.text.DecimalFormat;
 
 public class ReadProductExcel {
-    public Product[] readProductExcel(InputStream inputStream) {
+    public Product[] readProductExcel(InputStream inpProduct) {
         Product products[] = null;
         try {
-            XSSFWorkbook xw = new XSSFWorkbook(new FileInputStream(FileDescriptor.in));
+            XSSFWorkbook xw = new XSSFWorkbook(inpProduct);
             XSSFSheet xs = xw.getSheetAt(0);
             products = new Product[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
@@ -22,9 +22,9 @@ public class ReadProductExcel {
                     if (cell == null)
                         continue;
                     if (k == 0) {
-                        product.setId(this.getValue(cell));//商品编号
+                        product.setPid(this.getValue(cell));//商品编号
                     } else if (k == 1) {
-                        product.setName(this.getValue(cell));//商品名称
+                        product.setPname(this.getValue(cell));//商品名称
                     } else if (k == 2) {
                         product.setPrice(Float.valueOf(this.getValue(cell)));//商品价格
                     } else if (k == 3) {
@@ -42,7 +42,7 @@ public class ReadProductExcel {
 
     private String getValue(XSSFCell cell) {
         String value;
-        CellType type = cell.getCellTypeEnum();
+        CellType type = cell.getCellType();
 
         switch (type) {
             case STRING:
@@ -57,7 +57,6 @@ public class ReadProductExcel {
             case NUMERIC:
                 DecimalFormat df=new DecimalFormat("#");
                 value =df.format(cell.getNumericCellValue());
-                System.out.println("处理后的：");
                 break;
             case FORMULA:
                 value = cell.getCellFormula();
