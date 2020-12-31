@@ -27,7 +27,7 @@ public class Test {
                     System.out.println("登陆成功");
                     bool = false;
                     ReadProductExcel readProductExcel=new ReadProductExcel();
-                    Product products[]=readProductExcel.readProductExcel(inProduct);
+                    Product products[]=readProductExcel.getAllExcel(inProduct);
                     for(Product product:products){
                         System.out.print(product.getPid());
                         System.out.print("\t"+product.getPname());
@@ -36,8 +36,13 @@ public class Test {
                     }
                     System.out.println("请输入商品ID把该商品加入购物车：");
                     String pid= scanner.next();
+                    int count=0;
 
                     Product carts[]=new Product[3];
+                    Product product =readProductExcel.getProductByID(pid,inProduct);
+                    if(product!=null){
+                        carts[count++]=product;
+                    }
                     break;
                 } else {
                     System.out.println("登陆失败");

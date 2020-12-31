@@ -8,7 +8,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 
 public class ReadProductExcel {
-    public Product[] readProductExcel(InputStream inpProduct) {
+    public Product[] getAllExcel(InputStream inpProduct) {
         Product products[] = null;
         try {
             XSSFWorkbook xw = new XSSFWorkbook(inpProduct);
@@ -40,7 +40,43 @@ public class ReadProductExcel {
         return products;
     }
 
-    private String getValue(XSSFCell cell) {
+
+
+        public Product[] getProductByID(String id,InputStream in) {
+            Product products[] = null;
+            try {
+                XSSFWorkbook xw = new XSSFWorkbook(in);
+                XSSFSheet xs = xw.getSheetAt(0);
+                for (int j = 1; j <= xs.getLastRowNum(); j++) {
+                    XSSFRow row = xs.getRow(j);
+                    Product product = new Product();//每循环一次就把电子表格的一行的数据给对象赋值
+                    for (int k = 0; k <= row.getLastCellNum(); k++) {
+                        XSSFCell cell = row.getCell(k);
+                        if (cell == null)
+                            continue;
+                        if (k == 0) {
+                            product.setPid(this.getValue(cell));//商品编号
+                        } else if (k == 1) {
+                            product.setPname(this.getValue(cell));//商品名称
+                        } else if (k == 2) {
+                            product.setPrice(Float.valueOf(this.getValue(cell)));//商品价格
+                        } else if (k == 3) {
+                            product.setDesc(this.getValue(cell));//商品描述
+                        }
+                    }
+                    if(id.equals(product.getPid())){
+                        return product;
+                    }
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+
+        private String getValue(XSSFCell cell) {
         String value;
         CellType type = cell.getCellType();
 
