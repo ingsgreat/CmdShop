@@ -8,10 +8,10 @@ import java.io.*;
 import java.text.DecimalFormat;
 
 public class ReadProductExcel {
-    public Product[] getAllExcel(InputStream inpProduct) {
+    public Product[] getAllExcel(InputStream inProduct) {
         Product products[] = null;
         try {
-            XSSFWorkbook xw = new XSSFWorkbook(inpProduct);
+            XSSFWorkbook xw = new XSSFWorkbook(inProduct);
             XSSFSheet xs = xw.getSheetAt(0);
             products = new Product[xs.getLastRowNum()];
             for (int j = 1; j <= xs.getLastRowNum(); j++) {
@@ -42,10 +42,9 @@ public class ReadProductExcel {
 
 
 
-        public Product[] getProductByID(String id,InputStream in) {
-            Product products[] = null;
+        public Product getProductByID(String id,InputStream inProduct) {
             try {
-                XSSFWorkbook xw = new XSSFWorkbook(in);
+                XSSFWorkbook xw = new XSSFWorkbook(inProduct);
                 XSSFSheet xs = xw.getSheetAt(0);
                 for (int j = 1; j <= xs.getLastRowNum(); j++) {
                     XSSFRow row = xs.getRow(j);

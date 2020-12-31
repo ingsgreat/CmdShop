@@ -36,12 +36,24 @@ public class Test {
                     }
                     System.out.println("请输入商品ID把该商品加入购物车：");
                     String pid= scanner.next();
-                    int count=0;
-
-                    Product carts[]=new Product[3];
+                    ReadProductExcel readProductExcel1=new ReadProductExcel();
+                    inProduct=null;
+                    inProduct= Class.forName("Test").getResourceAsStream("/product.xlsx");
                     Product product =readProductExcel.getProductByID(pid,inProduct);
+
                     if(product!=null){
-                        carts[count++]=product;
+                        int a[]=new int[4];
+                        Product product1=new Product();
+                    }
+                    int choosen=1;
+                    System.out.println("请选择接下来的操作：1表示查看购物车,2表示继续购物");
+                    //1表示查看购物车
+                    //2表示继续购物
+                    if (choosen==1){
+                        ReadProductExcel readProductExcel2=new ReadProductExcel();
+                        inProduct=null;
+                        inProduct= Class.forName("Test").getResourceAsStream("/product.xlsx");
+                        Product product1 =readProductExcel.getProductByID(pid,inProduct);
                     }
                     break;
                 } else {
