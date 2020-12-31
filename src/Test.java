@@ -6,10 +6,9 @@ public class Test {
     public static void main(String[] args) throws ClassNotFoundException {
         Boolean bool = true;
         while (bool) {
-
             System.out.println("请输入用户名：");
             Scanner scanner = new Scanner(System.in);
-            String username = scanner.next();
+            String username = scanner.next();//阻塞方法
 
             System.out.println("请输入密码：");
             String password = scanner.next();
@@ -17,14 +16,13 @@ public class Test {
         开始读文件
         */
             InputStream in = Class.forName("Test").getResourceAsStream("/users.xlsx");
+
             InputStream inProduct = Class.forName("Test").getResourceAsStream("/product.xlsx");
+
             ReadUserExcel readUserExcel = new ReadUserExcel();
             User users[] = readUserExcel.readUserExcel(in);
-            System.out.println("从Excel读取的密码：" + users[0].getPassword());
-
             for (int i = 0; i < users.length; i++) {
                 if (username.equals(users[i].getUsername().trim()) && password.equals(users[i].getPassword().trim())) {
-                    System.out.println("登陆成功");
                     bool = false;
                     ReadProductExcel readProductExcel=new ReadProductExcel();
                     Product products[]=readProductExcel.getAllExcel(inProduct);
@@ -34,6 +32,8 @@ public class Test {
                         System.out.print("\t"+product.getPrice());
                         System.out.println("\t"+product.getDesc());
                     }
+                    int count=0;
+                    Product carts[]=new Product[3];//创建购物车，用数组模拟
                     System.out.println("请输入商品ID把该商品加入购物车：");
                     String pid= scanner.next();
                     ReadProductExcel readProductExcel1=new ReadProductExcel();
