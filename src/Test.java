@@ -1,3 +1,4 @@
+import javafx.scene.control.Tab;
 import java.io.InputStream;
 import java.sql.SQLOutput;
 import java.util.Scanner;
@@ -89,7 +90,7 @@ public class Test {
                     2、继续购物
                     （1）又要显示所有商品
                      */
-                        break;
+                     break;
                 } else {
                     System.out.println("登陆失败");
                 }
