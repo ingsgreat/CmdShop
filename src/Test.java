@@ -42,20 +42,54 @@ public class Test {
                     Product product =readProductExcel.getProductByID(pid,inProduct);
 
                     if(product!=null){
-                        int a[]=new int[4];
                         Product product1=new Product();
                     }
-                    int choosen=1;
-                    System.out.println("请选择接下来的操作：1表示查看购物车,2表示继续购物");
+                    System.out.println("请选择接下来的操作：查看购物车请按1,继续购物请按2");
                     //1表示查看购物车
                     //2表示继续购物
-                    if (choosen==1){
-                        ReadProductExcel readProductExcel2=new ReadProductExcel();
+
+                    int choose=scanner.nextInt();
+                    if (choose == 1) {
+                        for (int j = 0; j < carts.length; j++) {
+                            if (carts[j] != null) {
+                                System.out.print(carts[j].getPid());
+                                System.out.print("\t" + carts[j].getPname());
+                                System.out.print("\t\t" + carts[j].getPrice());
+                                System.out.println("\t\t" + carts[j].getDesc());
+                            }
+                        }
+                    } else if (choose == 2) {
+                        readProductExcel = new ReadProductExcel();
+                        inProduct = null;
+                        inProduct = Class.forName("Test").getResourceAsStream("/product.xlsx");//  /表示的就是classpath
+                        products = readProductExcel.getAllExcel(inProduct);
+                        for (Product p : products) {
+                            System.out.print(p.getPid());
+                            System.out.print("\t" + p.getPname());
+                            System.out.print("\t\t" + p.getPrice());
+                            System.out.println("\t\t" + p.getDesc());
+                        }
+                        /*
+                        遍历数组
+                        */
+                        System.out.println("请输入商品ID，把该商品加入购物车");
+                        pid=scanner.next();
+                        readProductExcel1=new ReadProductExcel();
                         inProduct=null;
-                        inProduct= Class.forName("Test").getResourceAsStream("/product.xlsx");
-                        Product product1 =readProductExcel.getProductByID(pid,inProduct);
+                        inProduct=Class.forName("Test").getResourceAsStream("/product.xlsx");
+                        Product product1=readProductExcel1.getProductByID(pid,inProduct);
+                        if(product!=null){
+                            carts[count++]=product1;
+                        }
                     }
-                    break;
+                     /*
+                    1、查看购物车
+                    （1）购物车是用数组模拟的
+                    （2）就是把数组内的元素一个一个找出来：对数组遍历
+                    2、继续购物
+                    （1）又要显示所有商品
+                     */
+                        break;
                 } else {
                     System.out.println("登陆失败");
                 }

@@ -10,5 +10,6 @@
     <orderEntry type="library" name="commons-collections4-4.4" level="project" />
     <orderEntry type="library" name="poi-4.1.2" level="project" />
     <orderEntry type="library" name="commons-collections4-4.41" level="project" />
+    <orderEntry type="library" name="commons-collections4-4.42" level="project" />
   </component>
 </module>
