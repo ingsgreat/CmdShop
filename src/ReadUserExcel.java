@@ -4,11 +4,14 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 
 public class ReadUserExcel {
-    public User[] readUserExcel(InputStream in) {
+    public User[] readExcel(InputStream in) {
         User users[] = null;
         try {
             XSSFWorkbook xw = new XSSFWorkbook(in);
@@ -42,7 +45,7 @@ public class ReadUserExcel {
 
     private String getValue(XSSFCell cell) {
         String value;
-        CellType type = cell.getCellType();
+        CellType type = cell.getCellTypeEnum();
 
         switch (type) {
             case STRING:
@@ -55,8 +58,8 @@ public class ReadUserExcel {
                 value = cell.getBooleanCellValue() + "";
                 break;
             case NUMERIC:
-                DecimalFormat df=new DecimalFormat("#");
-                value =df.format(cell.getNumericCellValue());
+                DecimalFormat df = new DecimalFormat("#");
+                value=df.format(cell.getNumericCellValue());
                 break;
             case FORMULA:
                 value = cell.getCellFormula();
